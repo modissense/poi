@@ -317,10 +317,12 @@ public class PostgreSQLFunctions {
 				if (FLAG == true){
 					query = query + " and ";
 				}
-				query = query + "((p.name ILIKE '%" + poiCrit.getKeywordsList().get(0) + "%'";
+				query = query + "(p.name ILIKE '%" + poiCrit.getKeywordsList().get(0) + "%'";
 				for ( int i = 1 ; i < poiCrit.getKeywordsList().size() ; i ++ ){
-					query = query +  " or p.name ILIKE '%" + poiCrit.getKeywordsList().get(i) + "%')";
+					query = query +  " or p.name ILIKE '%" + poiCrit.getKeywordsList().get(i) + "%'";
 				}
+                                
+                                query = query + ")";
 				FLAG = true;
 			}
 		
@@ -328,12 +330,14 @@ public class PostgreSQLFunctions {
 			if ( poiCrit.getKeywordsList() != null ){
 		
 				if (FLAG == true){
-					query = query + " and ";
+					query = query + " or ";
 				}
-				query = query + "p.keywords LIKE '%" + poiCrit.getKeywordsList().get(0) + "%'";
+				query = query + "(p.keywords ILIKE '%" + poiCrit.getKeywordsList().get(0) + "%'";
 				for ( int i = 1 ; i < poiCrit.getKeywordsList().size() ; i ++ ){
-					query = query +  " AND p.keywords LIKE '%" + poiCrit.getKeywordsList().get(i) + "%'";
+					query = query +  " or p.keywords ILIKE '%" + poiCrit.getKeywordsList().get(i) + "%'";
 				}
+                                
+                                query = query + ")";
 				FLAG = true;
 			}
 		

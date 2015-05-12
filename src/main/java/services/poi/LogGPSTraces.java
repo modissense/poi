@@ -48,15 +48,10 @@ public class LogGPSTraces extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*if(request.getParameter("info")!=null){
+		if(request.getParameter("info")!=null){
 			response.getOutputStream().print(this.description.serialize());
 		} 
-		else if(request.getParameter("GPSTraces")==null){
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-		} 
-		else {
-			
-		}*/
+		
 		
 	}
 
@@ -65,7 +60,9 @@ public class LogGPSTraces extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String token = null;
+               
+            System.out.println("GPS Log received");
+                String token = null;
 		double lat = -1;
 		double lon = -1;
 		String strTmstamp = null;
@@ -163,7 +160,7 @@ public class LogGPSTraces extends HttpServlet {
 			
 			PrintWriter out = response.getWriter();
 			out.write(msgResponse);*/
-		
+            
 	}
 
 }

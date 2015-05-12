@@ -26,7 +26,7 @@ public class GPSTrajCharacteristics {
         
         public String toJson(){
             String msgJson = null;
-            msgJson = "{\"user_id\":" + this.getUser_id() + ",\"x\":\"" + this.getLat() + "\",\"y\":\"" + this.getLon() + "\", \"tmstmp\":" + this.getTimestamp() + "}";	
+            msgJson = "{\"user_id\":" + this.getUser_id() + ",\"x\":" + this.getLat() + ",\"y\":" + this.getLon() + ", \"tmstmp\":\"" + this.getTimestamp() + "\"}";	
             return msgJson;
         }
 	

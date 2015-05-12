@@ -34,6 +34,9 @@ public class GetPOI extends HttpServlet {
         // TODO Auto-generated constructor stub
         super();
         this.description = new HTMLDescription("Get poi details");
+        this.description.addParameter("integer","POIid");
+        this.description.setReturnValue("Json");
+        this.description.setDescription("Web service returns information about the poi");
     }
 
     /**

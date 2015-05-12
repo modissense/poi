@@ -47,7 +47,7 @@ public class GetGPSTrace extends HttpServlet  {
         this.description = new HTMLDescription("Get Gps Trace");
         this.description.addParameter("List Of POI objects", "POIList");
         this.description.setReturnValue("boolean");
-        this.description.setDescription("Web service used to add a list of POIs");
+        this.description.setDescription("Web service used to get a list of traces");
         // TODO Auto-generated constructor stub
     }
 
@@ -72,7 +72,7 @@ public class GetGPSTrace extends HttpServlet  {
 			PersistentHashMapClient user = new PersistentHashMapClient();
 			user_id = user.getUserId(token);
                         
-                        //user_id = 2581;
+                        //ser_id = 2581;
                         //date = "2014-10-17";
                         
                         
@@ -87,7 +87,9 @@ public class GetGPSTrace extends HttpServlet  {
                         if (date == null){
                             try {
                                 ///////hbase code///////
-                                GPSresults = hBase.getWithCompositeKey("GPSIdTmstmp", user_id +"",choice);
+                                
+                                //GPSresults = hBase.getWithCompositeKey("GPSIdTmstmp", user_id +"",choice);
+                                GPSresults = hBase.getWithCompositeKey("testGPS", user_id +"",choice);
                             } catch (ParseException ex) {
                                 Logger.getLogger(GetGPSTrace.class.getName()).log(Level.SEVERE, null, ex);
                             }

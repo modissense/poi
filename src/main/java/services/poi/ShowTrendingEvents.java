@@ -32,6 +32,9 @@ public class ShowTrendingEvents extends HttpServlet {
     	// TODO Auto-generated constructor stub
     	super();
         this.description = new HTMLDescription("Show Trending Events");
+        this.description.addParameter("POIobject","POI");
+        this.description.setReturnValue("List Of POI objects");
+        this.description.setDescription("Web service returns trending events");
     }
 
 	/**

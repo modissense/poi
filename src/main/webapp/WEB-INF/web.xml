@@ -10,74 +10,6 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-    <servlet-name>usersAddPoi</servlet-name>
-    <servlet-class>services.users.AddPoi</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>usersCheckname</servlet-name>
-    <servlet-class>services.users.CheckName</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>usersDelete</servlet-name>
-    <servlet-class>services.users.Delete</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>usersLoggedIn</servlet-name>
-    <servlet-class>services.users.LoggedIn</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>userinfo</servlet-name>
-    <servlet-class>services.users.UserInfo</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>usersLogOut</servlet-name>
-    <servlet-class>services.users.LogOut</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>logoutAll</servlet-name>
-    <servlet-class>services.users.LogOutAll</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>usersRefresh</servlet-name>
-    <servlet-class>services.users.Refresh</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>usersRegister</servlet-name>
-    <servlet-class>services.users.Register</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>usersSaveToken</servlet-name>
-    <servlet-class>services.users.SaveToken</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>usersUpdate</servlet-name>
-    <servlet-class>services.users.Update</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>GetNetworks</servlet-name>
-    <servlet-class>supportingClasses.GetNetworks</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>TwitterCallback</servlet-name>
-    <servlet-class>supportingClasses.TwitterCallback</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>FbCallback</servlet-name>
-    <servlet-class>supportingClasses.FbCallback</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>FoursquareCallback</servlet-name>
-    <servlet-class>supportingClasses.FoursquareCallback</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>blogCreate</servlet-name>
-    <servlet-class>services.blog.Create</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>dummy</servlet-name>
-    <servlet-class>services.MyDummyService</servlet-class>
-  </servlet>
-  <servlet>
     <servlet-name>poiAddNewPOIs</servlet-name>
     <servlet-class>services.poi.AddNewPOIs</servlet-class>
   </servlet>
@@ -94,36 +26,12 @@
     <servlet-class>services.poi.GetPOIsFromTrajectories</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>poiGetPOIsFromExtSrcs</servlet-name>
-    <servlet-class>services.poi.GetPOIsFromExtSrcs</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>poiGetPOIsFromSN</servlet-name>
-    <servlet-class>services.poi.GetPOIsFromSN</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>poiFilterUnique</servlet-name>
-    <servlet-class>services.poi.FilterUnique</servlet-class>
-  </servlet>
-  <servlet>
     <servlet-name>poiCreateSemanticTrajectories</servlet-name>
     <servlet-class>services.poi.CreateSemanticTrajectories</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>poiUpdateSemanticTrajectories</servlet-name>
-    <servlet-class>services.poi.UpdateSemanticTrajectories</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>poiUpdatePOIInterest</servlet-name>
-    <servlet-class>services.poi.UpdatePOIInterest</servlet-class>
-  </servlet>
-  <servlet>
     <servlet-name>poiUpdatePOI</servlet-name>
     <servlet-class>services.poi.UpdatePOI</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>poiRefreshUsers</servlet-name>
-    <servlet-class>services.poi.RefreshUsers</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>poiLogGPSTraces</servlet-name>
@@ -154,74 +62,6 @@
     <servlet-class>services.poi.GetGPSTrace</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>usersAddPoi</servlet-name>
-    <url-pattern>/users/addpoi/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>usersCheckname</servlet-name>
-    <url-pattern>/users/checkname/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>usersDelete</servlet-name>
-    <url-pattern>/users/delete/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>usersLoggedIn</servlet-name>
-    <url-pattern>/users/loggedin/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>userinfo</servlet-name>
-    <url-pattern>/users/userinfo/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>usersLogOut</servlet-name>
-    <url-pattern>/users/logout/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>logoutAll</servlet-name>
-    <url-pattern>/users/logoutAll/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>usersRefresh</servlet-name>
-    <url-pattern>/users/refresh/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>usersRegister</servlet-name>
-    <url-pattern>/users/register/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>usersSaveToken</servlet-name>
-    <url-pattern>/users/savetoken/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>usersUpdate</servlet-name>
-    <url-pattern>/users/update/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>GetNetworks</servlet-name>
-    <url-pattern>/users/getnetworks/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>TwitterCallback</servlet-name>
-    <url-pattern>/users/tcallback/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>FbCallback</servlet-name>
-    <url-pattern>/users/fbcallback/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>FoursquareCallback</servlet-name>
-    <url-pattern>/users/fsqcallback/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>blogCreate</servlet-name>
-    <url-pattern>/blog/create/*</url-pattern>
-  </servlet-mapping>
-    <servlet-mapping>
-    <servlet-name>dummy</servlet-name>
-    <url-pattern>/dummy</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
     <servlet-name>poiAddNewPOIs</servlet-name>
     <url-pattern>/addnewpois/*</url-pattern>
   </servlet-mapping>
@@ -238,36 +78,12 @@
     <url-pattern>/getpoisfromtrajectories/*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>poiGetPOIsFromExtSrcs</servlet-name>
-    <url-pattern>/getpoisfromextsrcs/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>poiGetPOIsFromSN</servlet-name>
-    <url-pattern>/getpoisfromsn/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>poiFilterUnique</servlet-name>
-    <url-pattern>/filterunique/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
     <servlet-name>poiCreateSemanticTrajectories</servlet-name>
     <url-pattern>/createsemantictrajectories/*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>poiUpdateSemanticTrajectories</servlet-name>
-    <url-pattern>/updatesemantictrajectories/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>poiUpdatePOIInterest</servlet-name>
-    <url-pattern>/updatepoiinterest/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
     <servlet-name>poiUpdatePOI</servlet-name>
     <url-pattern>/updatepoi/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>poiRefreshUsers</servlet-name>
-    <url-pattern>/refreshusers/*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>poiLogGPSTraces</servlet-name>

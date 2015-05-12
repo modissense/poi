@@ -39,9 +39,9 @@ public class AddNewVisit extends HttpServlet {
     	// TODO Auto-generated constructor stub
     	super();
         this.description = new HTMLDescription("Add new Visit");
-        this.description.addParameter("poiId","integer");
-        this.description.addParameter("seq_num","integer");
-        this.description.addParameter("token", "string");
+        this.description.addParameter("integer","poiId");
+        this.description.addParameter("integer","seq_num");
+        this.description.addParameter("string","token");
         this.description.setReturnValue("boolean");
         this.description.setDescription("Web service used to add a visit");
     }
