@@ -140,6 +140,7 @@ public class GetPOI extends HttpServlet {
             
             GetPOIClient client = new GetPOIClient();
             poiObject.put("number_of_comments", client.getNumberOfComments((long)poi.getPoiId()));
+            System.out.println("\tgetPOI: number of comments returned");
             
             // they must be filled from another query here...
             JSONObject personalizedInfo = new JSONObject();
