@@ -146,7 +146,7 @@ public class GetPOI extends HttpServlet {
                 poiObject.put("number_of_comments", 30);
                 
             } else {
-                poiObject.put("image", "http://static.comicvine.com/uploads/original/11112/111123470/3927218-8383779697-troll.jpg");   
+                poiObject.put("image", poi.getPictureURL());   
                 poiObject.put("keywords", keys);
                 poiObject.put("hotness", poi.getHotness());
                 poiObject.put("interest", poi.getInterest());

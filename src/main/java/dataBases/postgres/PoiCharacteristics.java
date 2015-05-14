@@ -21,6 +21,7 @@ public class PoiCharacteristics {
     private Timestamp tmstamp = null;
     private ArrayList <String> keywordsList = null;
     private boolean ismine = false;
+    private String pictureURL;
 
     public PoiCharacteristics() {
     }
@@ -210,6 +211,16 @@ public class PoiCharacteristics {
         if(this.keywords.length()>0)
             this.keywords = this.keywords.substring(0,this.keywords.length()-1);
     }
+
+    public String getPictureURL() {
+        return pictureURL;
+    }
+
+    public void setPictureURL(String pictureURL) {
+        this.pictureURL = pictureURL;
+    }
+    
+    
     
     
 }

@@ -942,6 +942,7 @@ public class PostgreSQLFunctions {
             returnPOI.setHotness(result.getInt("hotness"));
             returnPOI.setInterest(result.getInt("interest"));
             returnPOI.setName(result.getString("name"));
+            returnPOI.setPictureURL(result.getString("picture_url"));
             return returnPOI;
         }
 
