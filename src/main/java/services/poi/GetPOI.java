@@ -135,24 +135,9 @@ public class GetPOI extends HttpServlet {
             poiObject.put("keywords", keys);
             poiObject.put("hotness", poi.getHotness());
             poiObject.put("interest", poi.getInterest());
-            poiObject.put("number_of_comments", 1000);
-            if(poi.getPoiId()==95){
-                poiObject.put("image", "https://scontent-a-vie.xx.fbcdn.net/hphotos-xfp1/t1.0-9/300025_308281582516175_432171612_n.jpg");   
-                keys.add("cafe");
-                keys.add("bar");
-                poiObject.put("keywords", keys);
-                poiObject.put("hotness", 120);
-                poiObject.put("interest", 0.8);
-                poiObject.put("number_of_comments", 30);
-                
-            } else {
-                poiObject.put("image", poi.getPictureURL());   
-                poiObject.put("keywords", keys);
-                poiObject.put("hotness", poi.getHotness());
-                poiObject.put("interest", poi.getInterest());
-                poiObject.put("number_of_comments", 1000);
-            }
+            poiObject.put("image", poi.getPictureURL());
             
+            poiObject.put("number_of_comments", 30);
             
             // they must be filled from another query here...
             JSONObject personalizedInfo = new JSONObject();
