@@ -5,6 +5,7 @@ import dataBases.postgres.PostgreSQLFunctions;
 import datastore.client.PersistentHashMapClient;
 import description.HTMLDescription;
 import description.ServiceDescription;
+import gr.ntua.ece.cslab.modissense.queries.clients.GetPOIClient;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -137,7 +138,8 @@ public class GetPOI extends HttpServlet {
             poiObject.put("interest", poi.getInterest());
             poiObject.put("image", poi.getPictureURL());
             
-            poiObject.put("number_of_comments", 30);
+            GetPOIClient client = new GetPOIClient();
+            poiObject.put("number_of_comments", client.getNumberOfComments((long)poi.getPoiId()));
             
             // they must be filled from another query here...
             JSONObject personalizedInfo = new JSONObject();
