@@ -6,6 +6,7 @@ import datastore.client.PersistentHashMapClient;
 import description.HTMLDescription;
 import description.ServiceDescription;
 import gr.ntua.ece.cslab.modissense.queries.clients.GetPOIClient;
+import gr.ntua.ece.cslab.modissense.queries.containers.UserIdStruct;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -75,7 +76,7 @@ public class GetPOI extends HttpServlet {
         Connection con = null;
 
         PersistentHashMapClient user = new PersistentHashMapClient();
-//        int user_id = user.getUserId(token);
+        int user_id = user.getUserId(token);
 
         try {
             con = postgres.OpenConnection();
@@ -104,9 +105,9 @@ public class GetPOI extends HttpServlet {
         
         try {
             if(!jsonP)
-                out.print(this.createJSONObject(poi).toJSONString());
+                out.print(this.createJSONObject(poi, user_id).toJSONString());
             else
-                out.print(callback+"("+this.createJSONObject(poi).toJSONString()+")");
+                out.print(callback+"("+this.createJSONObject(poi, user_id).toJSONString()+")");
         } 
         catch (Exception ex) {
             Logger.getLogger(GetPOI.class.getName()).log(Level.SEVERE, null, ex);
@@ -121,7 +122,7 @@ public class GetPOI extends HttpServlet {
         // TODO Auto-generated method stub
     }
 
-    private JSONObject createJSONObject(PoiCharacteristics poi) {
+    private JSONObject createJSONObject(PoiCharacteristics poi, int userId) {
         JSONObject poiObject = new JSONObject();
         if(poi == null){
             return poiObject;
@@ -139,17 +140,26 @@ public class GetPOI extends HttpServlet {
             poiObject.put("image", poi.getPictureURL());
             
             GetPOIClient client = new GetPOIClient();
-            poiObject.put("number_of_comments", client.getNumberOfComments((long)poi.getPoiId()));
-            System.out.println("\tgetPOI: number of comments returned");
+            client.setPoiId((long)poi.getPoiId());
+            PostgreSQLFunctions functions = new PostgreSQLFunctions();
+            functions.OpenConnection();
+            UserIdStruct uid=null;
+            for(UserIdStruct u:functions.getSocialNetworksForUser(userId)){
+                if(u.getC()=='F')
+                    uid=u;
+            }
+            client.setUserId(uid);
+            client.executeQuery();
+                    
+            poiObject.put("number_of_comments", client.getNumberOfFriendsComments());
             
-            // they must be filled from another query here...
             JSONObject personalizedInfo = new JSONObject();
-            personalizedInfo.put("hotness", 5);
-            personalizedInfo.put("interest", 0.87);
+            personalizedInfo.put("hotness", client.getPersonalizedHotness());
+            personalizedInfo.put("interest", client.getPersonalizedInterest());
             
             JSONObject comment = new JSONObject();
-            comment.put("text", "Good coffee, good beer, good wine :)");
-            comment.put("user", "Nikos");
+            comment.put("text", client.getComment());
+            comment.put("user", "Nikos -togo-");
             comment.put("user_picture", "https://www.gnu.org/graphics/babies/BabyGnuTux-Big.png");
             
             personalizedInfo.put("comment", comment);
@@ -160,4 +170,5 @@ public class GetPOI extends HttpServlet {
         }
         return poiObject;
     }
+    
 }

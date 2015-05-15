@@ -15,6 +15,9 @@ import java.util.logging.Logger;
 import dataBases.hBase.DBScanCharacteristics;
 
 import entites.Configuration;
+import gr.ntua.ece.cslab.modissense.queries.containers.UserIdStruct;
+import java.util.LinkedList;
+import java.util.List;
 
 
 
@@ -1128,6 +1131,28 @@ public class PostgreSQLFunctions {
         st.executeUpdate(query);//insert
         
         return FLAG;
+    }
+    
+    
+    public List<UserIdStruct> getSocialNetworksForUser(int userId) throws SQLException {
+        List<UserIdStruct> userIds = new LinkedList<>();
+        
+        st = con.createStatement();
+        query = "SELECT sn_name, sn_identifier FROM sn_list WHERE user_id="+userId;
+        ResultSet resultSet=st.executeQuery(query);
+        while(resultSet.next()) {
+            UserIdStruct uid = new UserIdStruct();
+            if(resultSet.getString("sn_name").equals("facebook"))
+                uid.setC('F');
+            else if(resultSet.getString("sn_name").equals("foursquare"))
+                uid.setC('f');
+            else
+                uid.setC('t');
+            uid.setId((long)resultSet.getLong("sn_identifier"));
+            userIds.add(uid);
+        }
+        resultSet.close();
+        return userIds;
     }
 }
 
