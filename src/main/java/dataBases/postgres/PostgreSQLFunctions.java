@@ -943,7 +943,7 @@ public class PostgreSQLFunctions {
             PoiCharacteristics returnPOI = new PoiCharacteristics();
             returnPOI.setPoiId(result.getInt("poi_id"));
             returnPOI.setHotness(result.getInt("hotness"));
-            returnPOI.setInterest(result.getInt("interest"));
+            returnPOI.setInterest(result.getDouble("interest"));
             returnPOI.setName(result.getString("name"));
             returnPOI.setPictureURL(result.getString("picture_url"));
             return returnPOI;

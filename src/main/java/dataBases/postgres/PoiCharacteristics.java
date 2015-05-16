@@ -13,7 +13,7 @@ public class PoiCharacteristics {
     private String name = null;
     private double x = -1;
     private double y = -1;
-    private int interest = -1;
+    private double interest = 0.0;
     private int hotness = -1;
     private boolean publicity = false;
     private String keywords = null;
@@ -110,7 +110,7 @@ public class PoiCharacteristics {
     }
 
     
-    public void setInterest(int interest) {
+    public void setInterest(double interest) {
         this.interest = interest;
     }
 
@@ -166,7 +166,7 @@ public class PoiCharacteristics {
     }
 
     
-    public int getInterest() {
+    public double getInterest() {
         return interest;
     }
 
