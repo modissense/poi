@@ -159,8 +159,8 @@ public class GetPOI extends HttpServlet {
             
             JSONObject comment = new JSONObject();
             comment.put("text", client.getComment());
-            comment.put("user", "Nikos -togo-");
-            comment.put("user_picture", "https://www.gnu.org/graphics/babies/BabyGnuTux-Big.png");
+            comment.put("user", client.getCommentUser());
+            comment.put("user_picture", client.getCommentUserPicURL());
             
             personalizedInfo.put("comment", comment);
 
