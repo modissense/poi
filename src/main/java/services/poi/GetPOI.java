@@ -155,6 +155,7 @@ public class GetPOI extends HttpServlet {
             
             JSONObject personalizedInfo = new JSONObject();
             personalizedInfo.put("hotness", client.getPersonalizedHotness());
+            System.out.println("Personalized value in json:"+client.getPersonalizedInterest());
             personalizedInfo.put("interest", client.getPersonalizedInterest());
             
             JSONObject comment = new JSONObject();
