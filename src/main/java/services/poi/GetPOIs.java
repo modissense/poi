@@ -230,15 +230,26 @@ public class GetPOIs extends HttpServlet {
                         //friendsList.add(new UserIdStruct('t', id%21));
                     }
                 } else {
-                    GetFriendsClient friendsClient = new GetFriendsClient(new UserIdStruct('F', (long)user_id));
+                    List<UserIdStruct> userIds = new LinkedList<>();
+                    PostgreSQLFunctions functions = new PostgreSQLFunctions();
+                    try {
+                        Connection connection = functions.OpenConnection();
+                        userIds=functions.getSocialNetworksForUser(user_id);
+                        functions.CloseConnection(connection);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(GetPOIs.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    for(UserIdStruct s: userIds) {
+                        GetFriendsClient friendsClient = new GetFriendsClient(s);
                     friendsClient.executeQuery();
                     friendsList.addAll(friendsClient.getFriendsList());
-                    friendsClient = new GetFriendsClient(new UserIdStruct('f', (long)user_id));
-                    friendsClient.executeQuery();
-                    friendsList.addAll(friendsClient.getFriendsList());
-                    friendsClient = new GetFriendsClient(new UserIdStruct('t', (long)user_id));
-                    friendsClient.executeQuery();
-                    friendsList.addAll(friendsClient.getFriendsList());
+                    }
+//                    friendsClient = new GetFriendsClient(new UserIdStruct('f', (long)user_id));
+//                    friendsClient.executeQuery();
+//                    friendsList.addAll(friendsClient.getFriendsList());
+//                    friendsClient = new GetFriendsClient(new UserIdStruct('t', (long)user_id));
+//                    friendsClient.executeQuery();
+//                    friendsList.addAll(friendsClient.getFriendsList());
                 }
 
                 args.setUserIds(friendsList);
