@@ -196,72 +196,75 @@ public class GetPOIs extends HttpServlet {
                 }
             } else {    //personalized, time related query
 
-            	
-                UserCheckinsQueryClient client  = new UserCheckinsQueryClient();
+                UserCheckinsQueryClient client = new UserCheckinsQueryClient();
                 UserCheckinsQueryArguments args = new UserCheckinsQueryArguments();
-                
+
                 // reverse indexing
 //                args.setyFrom((x1>x2?x2:x1));
 //                args.setyTo((x1>x2?x1:x2));
 //                args.setxFrom(y1>y2?y2:y1);
 //                args.setxTo(y1>y2?y1:y2);
+                args.setxFrom((x1 > x2 ? x2 : x1));
+                args.setxTo((x1 > x2 ? x1 : x2));
+                args.setyFrom(y1 > y2 ? y2 : y1);
+                args.setyTo(y1 > y2 ? y1 : y2);
 
-                args.setxFrom((x1>x2?x2:x1));
-                args.setxTo((x1>x2?x1:x2));
-                args.setyFrom(y1>y2?y2:y1);
-                args.setyTo(y1>y2?y1:y2);
-                
-                if(start_time!=null)
-                	args.setStartTimestamp(start_time.getTime());
-                if(end_time!=null)
-                	args.setEndTimestamp(end_time.getTime());
+                if (start_time != null) {
+                    args.setStartTimestamp(start_time.getTime());
+                }
+                if (end_time != null) {
+                    args.setEndTimestamp(end_time.getTime());
+                }
 
                 List<UserIdStruct> friendsList = new LinkedList<>();
-                for(String s:friends.split(",")){
-                    Long id = new Long(s);
-                    friendsList.add(new UserIdStruct('F', id));
-                    friendsList.add(new UserIdStruct('f', id));
-                    friendsList.add(new UserIdStruct('t', id));
+                if (!friends.equals("")) {
+                    for (String s : friends.split(",")) {
+                        Long id = new Long(s);
+                        friendsList.add(new UserIdStruct('F', id));
+                        friendsList.add(new UserIdStruct('f', id));
+                        friendsList.add(new UserIdStruct('t', id));
 
                     //friendsList.add(new UserIdStruct('F', id%21));
-                    //friendsList.add(new UserIdStruct('f', id%21));
-                    //friendsList.add(new UserIdStruct('t', id%21));
+                        //friendsList.add(new UserIdStruct('f', id%21));
+                        //friendsList.add(new UserIdStruct('t', id%21));
+                    }
+                } else {
+
                 }
-                
+
                 args.setUserIds(friendsList);
-                if(keywords!=null && !keywords.equals(""))
+                if (keywords != null && !keywords.equals("")) {
                     args.setKeywords(Arrays.asList(keywords.split(",")));
-                
+                }
+
                 // setting ordering method
-                System.out.println("POIs orderedBy:\t"+orderBy);
-                if(orderBy == null || orderBy.toLowerCase().equals("hotness")) {
+                System.out.println("POIs orderedBy:\t" + orderBy);
+                if (orderBy == null || orderBy.toLowerCase().equals("hotness")) {
                     client.setOrderByInterest(false);
                 } else {
                     client.setOrderByInterest(true);
                 }
-                
+
                 System.out.format("Friends: %d, Keywords: %d, "
                         + "From: (%.5f,%.5f), to: (%.5f,%.5f), "
-                        + "Start: %d, End: %d\n", 
-                        args.getUserIds().size(), args.getKeywords().size(), 
-                        args.getxFrom(), args.getyFrom(), 
+                        + "Start: %d, End: %d\n",
+                        args.getUserIds().size(), args.getKeywords().size(),
+                        args.getxFrom(), args.getyFrom(),
                         args.getxTo(), args.getyTo(),
                         args.getStartTimestamp(), args.getEndTimestamp());
-                
-                
+
                 client.setProtocol(ColumnIndexProtocol.class);
                 client.setArguments(args);
                 client.openConnection("UserCheckins50k");
                 client.executeQuery();
 //                client.executeSerializedQuery();
                 POIList rs = client.getResults();
-                
-                System.out.format("Exec time: %d ms, POIs returned: %d\n", 
+
+                System.out.format("Exec time: %d ms, POIs returned: %d\n",
                         client.getExecutionTime(), rs.getPOIs().size());
-                
-                
+
                 listOfPOIs = new ArrayList<>();
-                for(POI p : rs.getPOIs()) {
+                for (POI p : rs.getPOIs()) {
                     PoiCharacteristics oneOfTheMany = new PoiCharacteristics();
                     oneOfTheMany.setName(p.getName());
                     //reverse indexing
@@ -270,17 +273,19 @@ public class GetPOIs extends HttpServlet {
 //                    oneOfTheMany.setDescription();
                     oneOfTheMany.setKeywordsList(new ArrayList<>(p.getKeywords()));
                     oneOfTheMany.setTmstamp(new Timestamp(p.getTimestamp()));
-                    oneOfTheMany.setPoiId((int)Math.ceil(p.getId()));
+                    oneOfTheMany.setPoiId((int) Math.ceil(p.getId()));
                     oneOfTheMany.setIsMine(false);
-                    oneOfTheMany.setHotness((int)p.getHotness());
-                    oneOfTheMany.setInterest((int)(p.getInterest()*100));
-                    
+                    oneOfTheMany.setHotness((int) p.getHotness());
+                    oneOfTheMany.setInterest((int) (p.getInterest() * 100));
+
                     listOfPOIs.add(oneOfTheMany);
-                    if(new Integer(numberOfResults)==listOfPOIs.size())
+                    if (new Integer(numberOfResults) == listOfPOIs.size()) {
                         break;
+                    }
                 }
-                if(listOfPOIs.isEmpty())
-                    listOfPOIs=null;
+                if (listOfPOIs.isEmpty()) {
+                    listOfPOIs = null;
+                }
             }
 
             if (listOfPOIs != null) {
@@ -314,7 +319,7 @@ public class GetPOIs extends HttpServlet {
 
             PrintWriter out = response.getWriter();
             out.write(msgResponse);
-			//response.setContentType("application/json;charset=utf-8");
+            //response.setContentType("application/json;charset=utf-8");
             //response.getOutputStream().print(msgResponse);
         }
     }
@@ -324,7 +329,7 @@ public class GetPOIs extends HttpServlet {
      * response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+        // TODO Auto-generated method stub
 
     }
     //}
