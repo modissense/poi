@@ -26,6 +26,7 @@ import dataBases.postgres.PostgreSQLFunctions;
 import datastore.client.PersistentHashMapClient;
 import description.HTMLDescription;
 import description.ServiceDescription;
+import gr.ntua.ece.cslab.modissense.queries.clients.GetFriendsClient;
 import gr.ntua.ece.cslab.modissense.queries.clients.UserCheckinsQueryClient;
 import gr.ntua.ece.cslab.modissense.queries.containers.POI;
 import gr.ntua.ece.cslab.modissense.queries.containers.POIList;
@@ -229,7 +230,15 @@ public class GetPOIs extends HttpServlet {
                         //friendsList.add(new UserIdStruct('t', id%21));
                     }
                 } else {
-
+                    GetFriendsClient friendsClient = new GetFriendsClient(new UserIdStruct('F', (long)user_id));
+                    friendsClient.executeQuery();
+                    friendsList.addAll(friendsClient.getFriendsList());
+                    friendsClient = new GetFriendsClient(new UserIdStruct('f', (long)user_id));
+                    friendsClient.executeQuery();
+                    friendsList.addAll(friendsClient.getFriendsList());
+                    friendsClient = new GetFriendsClient(new UserIdStruct('t', (long)user_id));
+                    friendsClient.executeQuery();
+                    friendsList.addAll(friendsClient.getFriendsList());
                 }
 
                 args.setUserIds(friendsList);
